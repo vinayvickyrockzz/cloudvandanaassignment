@@ -1,87 +1,149 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Customer Survey Form</title>
+</head>
   <style>
-    /* Updated CSS styles with a black background color */
-    body {
-      font-family: 'Times New Roman', Times, serif, sans-serif;
-      text-align: center;
-      background-color: #000; /* Set the background color to black */
-      color: #fff; /* Set the text color to white */
-    }
-
-    .calculator {
+    /* Styling for the outer box */
+    .outer-box {
+      border: 2px solid  #ffffff; /* Blue border for the outer box */
+      padding: 20px; /* Add padding to create space inside the outer box */
       width: 300px;
       margin: 0 auto;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #333; /* Set the calculator's background color to a darker shade */
     }
 
-    input[type="text"] {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 5px;
-      background-color: #444; /* Set the input field background color */
-      color: #fff; /* Set the input field text color to white */
+    /* Styling for the inner box */
+    .inner-box {
+      border: 2px solid #000000;
+      background-color: #000000/* Red border for the inner box */
+      padding: 10px; /* Add padding to create space inside the inner box */
     }
-
-    button {
-      width: 70px;
-      height: 40px;
-      margin: 5px;
-      font-size: 18px;
+    .btn {
+      background-color: #3498db; /* Blue background for buttons */
+      color: #fff; /* White text color for buttons */
+      padding: 5px 10px;
+      border: none;
       cursor: pointer;
-      background-color: #666; /* Set button background color */
-      color: #fff; /* Set button text color to white */
-      border: none; /* Remove button borders */
-      border-radius: 5px;
     }
   </style>
-</head>
-<body>
-  <div class="calculator">
-    <input type="text" id="display" readonly>
+  <style>
+  
+  body {
+    background-color: #3498db; /* Blue background color */
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
 
-    <button onclick="addToDisplay('7')">7</button>
-    <button onclick="addToDisplay('8')">8</button>
-    <button onclick="addToDisplay('9')">9</button>
+  h1 {
+    color: #fff; /* White text color for the title */
+  }
+    </style>
+<body>
+  <h1>Customer Survey Form</h1>
+  <div class="inner-box">
+  <form id="surveyForm" onsubmit="return validateForm()">
+    <label for="firstName">First Name:</label>
+    
+    <input type="text" id="firstName" required>
+<br>
+    <br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" required>
+<br>
+    <br>
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" required>
+    <br>
+    <br>
+
+    <label for="country">Country:</label>
+    
+    <select id="country" required>
+      <br>
+      <br>
+      <option value="INDIA">INDIA</option>
+      <option value="USA">USA</option>
+      <option value="Canada">Canada</option>
+      <option value="UK">UK</option>
+      <!-- Add more countries as needed -->
+    </select>
+    <br>
+    <br>
+
+    <label>Gender:</label>
+    <input type="checkbox" id="male" name="gender" value="Male">
+    <label for="male">Male</label>
+    <input type="checkbox" id="female" name="gender" value="Female">
+    <label for="female">Female</label>
+    <br>
+    <br>
+
+    <label for="profession">Profession:</label>
+    <input type="text" id="profession" required>
+    <br>
+    <br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <br>
+    <br>
+
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" required>
+    <br>
+    <br>
    
 
-    <button onclick="addToDisplay('4')">4</button>
-    <button onclick="addToDisplay('5')">5</button>
-    <button onclick="addToDisplay('6')">6</button>
-    <button onclick="addToDisplay('0')">0</button>
-    <button onclick="addToDisplay('1')">1</button>
-    <button onclick="addToDisplay('2')">2</button>
-    <button onclick="addToDisplay('3')">3</button>
-    
-    <button onclick="clearDisplay()">AC</button>
-    <button onclick="addToDisplay('+')">+</button>
-    <button onclick="addToDisplay('-')">-</button>
-    <button onclick="addToDisplay('*')">*</button>
-    <button onclick="addToDisplay('/')">/</button>
-    <button onclick="calculateResult()">=</button>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+  </form>
+    <div class="copyright-info">
+      &copy; 2023 Customer Survey Form. All rights reserved | Designed by W3layouts
+    </div>
+
+  <div id="popup" style="display: none;">
+    <h2>Survey Form Submission</h2>
+    <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
+    <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
+    <p><strong>Date of Birth:</strong> <span id="popupDob"></span></p>
+    <p><strong>Country:</strong> <span id="popupCountry"></span></p>
+    <p><strong>Gender:</strong> <span id="popupGender"></span></p>
+    <p><strong>Profession:</strong> <span id="popupProfession"></span></p>
+    <p><strong>Email:</strong> <span id="popupEmail"></span></p>
+    <p><strong>Mobile Number:</strong> <span id="popupMobile"></span></p>
+    <button onclick="closePopup()">Close</button>
   </div>
 
   <script>
-    let display = document.getElementById("display");
+    function validateForm() {
+      // Validation logic can be added here (e.g., email format validation, mobile number format validation).
+      // For simplicity, let's assume all fields are valid.
 
-    function addToDisplay(value) {
-      display.value += value;
+      // Display the data in the popup
+      document.getElementById("popupFirstName").innerText = document.getElementById("firstName").value;
+      document.getElementById("popupLastName").innerText = document.getElementById("lastName").value;
+      document.getElementById("popupDob").innerText = document.getElementById("dob").value;
+      document.getElementById("popupCountry").innerText = document.getElementById("country").value;
+      const genderCheckboxes = document.querySelectorAll('input[name="gender"]:checked');
+      const genders = Array.from(genderCheckboxes).map(cb => cb.value);
+      document.getElementById("popupGender").innerText = genders.join(', ');
+      document.getElementById("popupProfession").innerText = document.getElementById("profession").value;
+      document.getElementById("popupEmail").innerText = document.getElementById("email").value;
+      document.getElementById("popupMobile").innerText = document.getElementById("mobile").value;
+
+      // Display the popup
+      document.getElementById("popup").style.display = "block";
+
+      // Reset the form
+      document.getElementById("surveyForm").reset();
+
+      // Prevent the form from submitting
+      return false;
     }
 
-    function clearDisplay() {
-      display.value = "";
-    }
-
-    function calculateResult() {
-      try {
-        display.value = eval(display.value);
-      } catch (error) {
-        display.value = "Error";
-      }
+    function closePopup() {
+      // Close the popup
+      document.getElementById("popup").style.display = "none";
     }
   </script>
 </body>
